@@ -55,13 +55,14 @@ func GithubCallback(c *fiber.Ctx) error {
 	}
 	defer response.Body.Close()
 
-if response.StatusCode == http.StatusOK {
-    bodyBytes, err := io.ReadAll(response.Body)
-    if err != nil {
-        log.Fatal(err)
-    }
-    bodyString := string(bodyBytes)
-    log.Println(bodyString)
-}
+	log.Println(response.StatusCode)
+	if response.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(response.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+		bodyString := string(bodyBytes)
+		log.Println(bodyString)
+	}
 	return c.SendString("Welcome to Github, " + token.AccessToken)
 }
